@@ -1,10 +1,19 @@
 import React, { useRef } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext';
 
 const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const { signup } = useAuth();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    signup(emailRef.current.value, passwordRef.current.value);
+  }
+
   return (
     <>
       <Card>
