@@ -1,5 +1,6 @@
 import React from 'react';
 import { auth, provider } from '../firabase';
+import { Container } from 'react-bootstrap';
 
 const Login = () => {
   const login = () => {
@@ -9,9 +10,15 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <button onClick={login}>Google ile giriş yap</button>
-    </div>
+    <Container
+      fluid
+      style={{ height: '100vh' }}
+      className="d-flex justify-content-center bg-dark align-items-center"
+    >
+      <button onClick={login} class="btn btn-light">
+        Google ile giriş yap
+      </button>
+    </Container>
   );
 };
 

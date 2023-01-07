@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+// import './App.css';
 import Login from './components/Login';
 import { auth } from './firabase';
 import Home from './components/Home';
@@ -21,7 +21,14 @@ function App() {
     });
   }, []);
 
-  return <div>{user ? <Home user={user} /> : <Login setUser={setUser} />}</div>;
+  return (
+    <div
+      // style={{ backgroundColor: 'red' }}
+      className="bg-dark"
+    >
+      {user ? <Home user={user} /> : <Login setUser={setUser} />}
+    </div>
+  );
 }
 
 export default App;
