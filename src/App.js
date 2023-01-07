@@ -1,21 +1,27 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import Signup from './components/Signup';
-import { Container } from 'react-bootstrap';
-import { AuthProvider } from './contexts/AuthContext';
+import Login from './components/Login';
+import { auth } from './firabase';
+import Home from './components/Home';
 // import { initializeApp } from 'firebase/app';
+
 function App() {
-  return (
-    <AuthProvider>
-      <Container
-        style={{ minHeight: '100vh' }}
-        className="d-flex align-items-center justify-content-center "
-      >
-        <div className="w-100" style={{ minHeight: '400px' }}>
-          <Signup />
-        </div>
-      </Container>
-    </AuthProvider>
-  );
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user has logged in...
+        console.log(authUser);
+        setUser(authUser);
+      } else {
+        // user has logged out...
+        setUser(null);
+      }
+    });
+  }, []);
+
+  return <div>{user ? <Home user={user} /> : <Login setUser={setUser} />}</div>;
 }
 
 export default App;
